@@ -15,25 +15,25 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "bastion" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
-  subnet_id = aws_subnet.public1.id
-   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
-   associate_public_ip_address = true
-   key_name = "asmaa"
-   tags = {
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = "t2.micro"
+  subnet_id                   = module.network.public_subnet_1
+  vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
+  associate_public_ip_address = true
+  key_name                    = "asmaa"
+  tags = {
     Name = "Bastion"
-   }
+  }
 }
 
 
 resource "aws_instance" "private" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
-    subnet_id = aws_subnet.private1.id
-   vpc_security_group_ids = [aws_security_group.allow_ssh_and_3000.id]
-     key_name = "asmaa"
-   tags = {
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = "t2.micro"
+  subnet_id              = module.network.private_subnet_1
+  vpc_security_group_ids = [aws_security_group.allow_ssh_and_3000.id]
+  key_name               = "asmaa"
+  tags = {
     Name = "private"
-   }
+  }
 }

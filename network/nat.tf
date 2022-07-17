@@ -1,5 +1,5 @@
 resource "aws_eip" "eip" {
-   tags = {
+  tags = {
     Name = "eip"
   }
 }
@@ -12,6 +12,6 @@ resource "aws_nat_gateway" "nat" {
   tags = {
     Name = "gw NAT"
   }
- 
- 
+
+
 }
